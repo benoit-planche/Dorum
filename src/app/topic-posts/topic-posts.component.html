@@ -1,1 +1,12 @@
-<p>topic-posts works!</p>
+// List of topic
+<div class="topic-posts-container">
+  <h2>Topic Posts</h2>
+  <ul>
+    @for (post of topics; track post.id) {
+      <li>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.content }}</p>
+      </li>
+    }
+  </ul>
+</div>

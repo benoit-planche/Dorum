@@ -8,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrl: './create-topic.component.scss'
 })
 export class CreateTopicComponent {
+  title = '';
+  description = '';
+
+  constructor() {}
+
+  createTopic() {
+    console.log('Creating topic with title:', this.title, 'and description:', this.description);
+  }
+
 
 }

@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './topic-posts.component.scss'
 })
 export class TopicPostsComponent {
+topics: any;
 
 }
