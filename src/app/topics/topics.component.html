@@ -1,11 +1,15 @@
-<div class="topic-posts-container">
-  <h2>Topic Posts</h2>
+<div class="topics-container">
+  <h2>Topics</h2>
   <ul>
-    @for (topic of topics; track topic.id) {
+    @for (element of topics; track element.id) {
       <li>
-        <h3>{{ topic.title }}</h3>
-        <p>{{ topic.description }}</p>
+        <h4><a [routerLink]="['/topics', element.id]">{{ element.title }}</a></h4>
+        <p>{{ element.description }}</p>
+
       </li>
+
     }
   </ul>
+  <button routerLink="/create-topic">Create Topic</button>
+  <mat-paginator [length]="topics.length" [pageSize]="pageSize" (page)="onPageChange($event)"></mat-paginator>
 </div>

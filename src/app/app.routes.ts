@@ -9,17 +9,18 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { EditTopicComponent } from './edit-topic/edit-topic.component';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'topics', component: TopicsComponent },
-  { path: 'topics/:id', component: TopicPostsComponent },
-  { path: 'post/:id', component: PostDetailComponent },
-  { path: 'create-topic', component: CreateTopicComponent },
-  { path: 'create-post', component: CreatePostComponent },
-  { path: 'edit-topic/:id', component: EditTopicComponent },
-  { path: 'edit-post/:id', component: EditPostComponent },
+  { path: 'topics', component: TopicsComponent, canActivate: [AuthGuard] },
+  { path: 'topics/:id', component: TopicPostsComponent, canActivate: [AuthGuard] },
+  { path: 'post/:id', component: PostDetailComponent, canActivate: [AuthGuard] },
+  { path: 'create-topic', component: CreateTopicComponent, canActivate: [AuthGuard] },
+  { path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard] },
+  { path: 'edit-topic/:id', component: EditTopicComponent, canActivate: [AuthGuard] },
+  { path: 'edit-post/:id', component: EditPostComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
