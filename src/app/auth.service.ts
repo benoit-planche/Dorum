@@ -8,7 +8,6 @@ export class AuthService {
   private isAuthenticated = false;
 
   login(username: string, password: string): boolean {
-    // Implement your login logic here
     if (username === 'admin' && password === 'admin') {
       this.isAuthenticated = true;
       return true;
