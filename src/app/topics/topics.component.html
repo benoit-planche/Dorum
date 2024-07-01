@@ -1,14 +1,10 @@
 <div class="topics-container">
   <h2>Topics</h2>
   <ul>
-    @for (element of topics; track element.id) {
-      <li>
-        <h4><a [routerLink]="['/topics', element.id]">{{ element.title }}</a></h4>
-        <p>{{ element.description }}</p>
-
-      </li>
-
-    }
+    <li *ngFor="let element of paginatedTopics; trackBy: trackById">
+      <h4><a [routerLink]="['/topics', element.id]">{{ element.title }}</a></h4>
+      <p>{{ element.description }}</p>
+    </li>
   </ul>
   <button routerLink="/create-topic">Create Topic</button>
   <mat-paginator [length]="topics.length" [pageSize]="pageSize" (page)="onPageChange($event)"></mat-paginator>

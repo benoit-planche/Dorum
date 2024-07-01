@@ -56,6 +56,36 @@ export class TopicsService {
       id: 10,
       title: 'Tenth topic',
       description: 'This is the tenth topic'
+    },
+    {
+      id: 11,
+      title: 'Eleventh topic',
+      description: 'This is the eleventh topic'
+    },
+    {
+      id: 12,
+      title: 'Twelfth topic',
+      description: 'This is the twelfth topic'
+    },
+    {
+      id: 13,
+      title: 'Thirteenth topic',
+      description: 'This is the thirteenth topic'
+    },
+    {
+      id: 14,
+      title: 'Fourteenth topic',
+      description: 'This is the fourteenth topic'
+    },
+    {
+      id: 15,
+      title: 'Fifteenth topic',
+      description: 'This is the fifteenth topic'
+    },
+    {
+      id: 16,
+      title: 'Sixteenth topic',
+      description: 'This is the sixteenth topic'
     }
   ];
   pageSize = 5;
