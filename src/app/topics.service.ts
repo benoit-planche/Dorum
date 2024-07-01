@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CreateTopicComponent } from './create-topic/create-topic.component';
 
 @Injectable({
   providedIn: 'root'
@@ -68,8 +69,14 @@ export class TopicsService {
     return this.topics.find(topic => topic.id === id);
   }
 
-  createTopic(topic: any) {
-    this.topics.push(topic);
+  createTopic(topic: CreateTopicComponent) {
+    const newTopic = {
+      id: this.topics.length + 1,
+      title: topic.title,
+      description: topic.description
+    };
+    this.topics.push(newTopic);
+    console.log(this.topics);
   }
 
   updateTopic(id: number, updatedTopic: any) {

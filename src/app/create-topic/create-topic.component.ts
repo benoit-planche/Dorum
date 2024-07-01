@@ -1,9 +1,12 @@
+import { TopicsService } from './../topics.service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-create-topic',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './create-topic.component.html',
   styleUrl: './create-topic.component.scss'
 })
@@ -11,10 +14,11 @@ export class CreateTopicComponent {
   title = '';
   description = '';
 
-  constructor() {}
+  constructor(private TopicsService: TopicsService, private router: Router) {}
 
   createTopic() {
-    console.log('Creating topic with title:', this.title, 'and description:', this.description);
+    this.TopicsService.createTopic(this);
+    this.router.navigate(['/topics']);
   }
 
 
