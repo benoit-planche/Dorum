@@ -23,8 +23,6 @@ import { CommonModule } from '@angular/common';
 export class TopicsComponent {
   topics: any[] = [];
   paginatedTopics: any[] = [];
-  pageSize = 5;
-  pageIndex = 0;
 
   constructor(private topicsService: TopicsService) {}
 
@@ -34,16 +32,20 @@ export class TopicsComponent {
   }
 
   updatePaginatedTopics() {
-    this.paginatedTopics = this.topics.slice(this.pageIndex * this.pageSize, (this.pageIndex + 1) * this.pageSize);
+    this.paginatedTopics = this.topics.slice(this.topicsService.pageIndex * this.topicsService.pageSize, (this.topicsService.pageIndex + 1) * this.topicsService.pageSize);
   }
 
   onPageChange(event: any) {
-    this.pageIndex = event.pageIndex;
-    this.pageSize = event.pageSize;
+    this.topicsService.pageIndex = event.pageIndex;
+    this.topicsService.pageSize = event.pageSize;
     this.updatePaginatedTopics();
   }
 
   trackById(index: number, item: any): number {
     return item.id;
+  }
+
+  getSizePage() {
+    return this.topicsService.pageSize;
   }
 }

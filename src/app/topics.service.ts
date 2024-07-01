@@ -10,7 +10,8 @@ export class TopicsService {
     {
       id: 1,
       title: 'First topic',
-      description: 'This is the first topic'
+      description: 'This is the first topic',
+      ownerId: 1
     },
     {
       id: 2,
