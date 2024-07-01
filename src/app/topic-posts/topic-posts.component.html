@@ -1,2 +1,11 @@
-<p>topic-posts works!</p>
-
+<div class="topic-posts-container">
+  <h2>{{ topic?.title }}</h2>
+  <p>{{ topic?.description }}</p>
+  <ul>
+    <li *ngFor="let post of posts">
+      <h4><a [routerLink]="['/post', post.id]">{{ post.title }}</a></h4>
+      <p>{{ post.content }}</p>
+    </li>
+  </ul>
+  <button routerLink="/create-post">Create Post</button>
+</div>

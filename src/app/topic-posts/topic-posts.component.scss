@@ -1,0 +1,71 @@
+/* topic-posts.component.scss */
+
+.topic-posts-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+p {
+  color: #555;
+  margin: 0 0 20px 0;
+  font-family: 'Arial', sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #fff;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+li:hover {
+  transform: translateY(-2px);
+}
+
+h4 {
+  margin: 0 0 10px;
+  color: #007BFF;
+}
+
+h4 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h4 a:hover {
+  text-decoration: underline;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Arial', sans-serif;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
