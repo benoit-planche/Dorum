@@ -70,6 +70,10 @@ button.buttonReturn {
   background-color: #555;
 }
 
-button:hover {
+button.buttonReturn:hover {
   background-color: #333;
+}
+
+button:hover {
+  background-color: #0056b3;
 }

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -7,6 +9,24 @@ import { Component } from '@angular/core';
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss'
 })
-export class PostDetailComponent {
+export class PostDetailComponent implements OnInit {
+  postId!: number;
+  post: any;
 
+  constructor(
+    private route: ActivatedRoute,
+    private postsService: PostsService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.postId = +params['id'];
+      this.post = this.postsService.getPostById(this.postId);
+    });
+  }
+
+  goBack() {
+    this.router.navigate(['/topics/' + this.post.topicId]);
+  }
 }
