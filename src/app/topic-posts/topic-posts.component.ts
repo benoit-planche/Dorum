@@ -4,11 +4,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PostsService } from '../posts.service';
 import { TopicsService } from '../topics.service';
 import { MatPaginator } from '@angular/material/paginator';
+import { TruncatePipe } from '../truncate.pipe';
 
 @Component({
   standalone: true,
   selector: 'app-topic-posts',
-  imports: [RouterLink, CommonModule, MatPaginator],
+  imports: [RouterLink, CommonModule, MatPaginator, TruncatePipe],
   templateUrl: './topic-posts.component.html',
   styleUrls: ['./topic-posts.component.scss'],
   providers: [PostsService, TopicsService],

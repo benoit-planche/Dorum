@@ -66,6 +66,10 @@ button {
   font-family: 'Arial', sans-serif;
 }
 
+button.buttonReturn {
+  background-color: #555;
+}
+
 button:hover {
-  background-color: #0056b3;
+  background-color: #333;
 }

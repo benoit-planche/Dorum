@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class PostsService {
 
   private posts = [
-    { id: 1, topicId: 1, title: 'Post 1', content: 'Content 1', owner: 'user1' },
+    { id: 1, topicId: 1, title: 'Post 1', content: 'Content 1 sergqg uqhgiqg ezuykfgbikqzgdbfvkujh; bq<kujhghbdfukyj chgbujqyhwgbdf j,<gbwh,fv bKUYJQHZGEVFJHGVQ<JH,SGNDFGV CKUJH<FGVZFJe,h', owner: 'user1' },
     { id: 2, topicId: 1, title: 'Post 2', content: 'Content 2', owner: 'user2' },
     { id: 3, topicId: 1, title: 'Post 3', content: 'Content 3', owner: 'user3' },
     { id: 4, topicId: 2, title: 'Post 4', content: 'Content 4', owner: 'user4' },

@@ -1,12 +1,14 @@
 <div class="topic-posts-container">
+  <button routerLink="/topics">Back to Topics</button>
   <h2>{{ topic?.title }}</h2>
   <p>{{ topic?.description }}</p>
   <ul>
     <li *ngFor="let post of paginatedPosts; trackBy: trackById">
       <h4><a [routerLink]="['/post', post.id]">{{ post.title }}</a></h4>
-      <p>{{ post.content }}</p>
+      <p>{{ post.content | truncate:80 }}</p>
     </li>
   </ul>
   <button routerLink="/create-post">Create Post</button>
+  <button class="buttonReturn" routerLink="/topics">Back to Topics</button>
   <mat-paginator [length]="posts.length" [pageSize]="getSizePage()" (page)="onPageChange($event)"></mat-paginator>
 </div>
