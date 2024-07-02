@@ -10,7 +10,7 @@ export class PostsService {
     { id: 2, topicId: 1, title: 'Post 2', content: 'Content 2', owner: 'user2' },
     { id: 3, topicId: 1, title: 'Post 3', content: 'Content 3', owner: 'user3' },
     { id: 4, topicId: 2, title: 'Post 4', content: 'Content 4', owner: 'user4' },
-    { id: 5, topicId: 2, title: 'Post 5', content: 'Content 5', owner: 'user5' },
+    { id: 5, topicId: 6, title: 'Post 5', content: 'Content 5', owner: 'user5' },
     { id: 6, topicId: 2, title: 'Post 6', content: 'Content 6', owner: 'user6' },
     { id: 7, topicId: 3, title: 'Post 7', content: 'Content 7', owner: 'user7' },
     { id: 8, topicId: 3, title: 'Post 8', content: 'Content 8', owner: 'user8' },
@@ -30,7 +30,7 @@ export class PostsService {
     { id: 22, topicId: 8, title: 'Post 22', content: 'Content 22', owner: 'user22' },
     { id: 23, topicId: 8, title: 'Post 23', content: 'Content 23', owner: 'user23' },
     { id: 24, topicId: 8, title: 'Post 24', content: 'Content 24', owner: 'user24' },
-    { id: 25, topicId: 9, title: 'Post 25', content: 'Content 25', owner: 'user25' },
+    { id: 25, topicId: 6, title: 'Post 25', content: 'Content 25', owner: 'user25' },
   ];
   pageSize = 5;
   pageIndex = 0;

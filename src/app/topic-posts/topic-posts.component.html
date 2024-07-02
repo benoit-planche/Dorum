@@ -2,10 +2,11 @@
   <h2>{{ topic?.title }}</h2>
   <p>{{ topic?.description }}</p>
   <ul>
-    <li *ngFor="let post of posts">
+    <li *ngFor="let post of paginatedPosts; trackBy: trackById">
       <h4><a [routerLink]="['/post', post.id]">{{ post.title }}</a></h4>
       <p>{{ post.content }}</p>
     </li>
   </ul>
   <button routerLink="/create-post">Create Post</button>
+  <mat-paginator [length]="posts.length" [pageSize]="getSizePage()" (page)="onPageChange($event)"></mat-paginator>
 </div>
