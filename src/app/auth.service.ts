@@ -8,18 +8,19 @@ export class AuthService {
 
   constructor(private pocketBaseService: PocketBaseService) {}
 
-  async login(email: string, password: string) {
-    try {
-      await this.pocketBaseService.login(email, password);
-    } catch (error) {
-      alert(error);
-    }
+  login(email: string, password: string) {
+    this.pocketBaseService.pb.collection('users').authWithPassword(email, password);
   }
 
   async signup(username: string, email: string, password: string) {
     try {
-      await this.pocketBaseService.signup(username, email, password);
-      await this.pocketBaseService.login(email, password);
+      this.pocketBaseService.pb.collection('users').create({
+        username,
+        email,
+        password,
+        passwordConfirm: password
+      });
+      this.login(email, password);
     } catch (error) {
       console.error('Signup error:', error);
       alert(error);
@@ -27,10 +28,14 @@ export class AuthService {
   }
 
   logout() {
-    this.pocketBaseService.logout();
+    this.pocketBaseService.pb.authStore.clear();
   }
 
   getCurrentUser() {
-    return this.pocketBaseService.getCurrentUser();
+    return this.pocketBaseService.pb.authStore.model;
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.pocketBaseService.pb.authStore.token;
   }
 }
