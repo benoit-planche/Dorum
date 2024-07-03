@@ -27,7 +27,9 @@ export class TopicsComponent {
   constructor(private topicsService: TopicsService) {}
 
   ngOnInit() {
-    this.topics = this.topicsService.getTopics();
+    this.topicsService.getTopics().then((topics) => {
+      this.topics = topics;
+    });
     this.updatePaginatedTopics();
   }
 

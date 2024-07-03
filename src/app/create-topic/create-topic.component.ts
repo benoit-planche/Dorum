@@ -14,11 +14,12 @@ export class CreateTopicComponent {
   title = '';
   description = '';
 
-  constructor(private TopicsService: TopicsService, private router: Router) {}
+  constructor(private topicsService: TopicsService, private router: Router) {}
 
   createTopic() {
-    this.TopicsService.createTopic(this);
-    this.router.navigate(['/topics']);
+    this.topicsService.createTopic(this).then(() => {
+      this.router.navigate(['/topics']);
+    });
   }
 
 
