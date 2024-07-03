@@ -15,7 +15,7 @@ import { TruncatePipe } from '../truncate.pipe';
   providers: [PostsService, TopicsService],
 })
 export class TopicPostsComponent implements OnInit {
-  topicId!: number;
+  topicId!: string;
   topic: any;
   posts: any[] = [];
   paginatedPosts: any[] = [];
@@ -28,9 +28,10 @@ export class TopicPostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.topicId = +params['id'];
       this.topic = this.topicsService.getTopicById(this.topicId);
-      this.posts = this.postsService.getPostsByTopicId(this.topicId);
+      this.postsService.getPostsByTopicId(this.topicId).then((posts) => {
+        this.posts = posts;
+      });
     });
     this.updatePaginatedPosts();
   }

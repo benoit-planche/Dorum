@@ -17,9 +17,9 @@ export class CreateTopicComponent {
   constructor(private topicsService: TopicsService, private router: Router) {}
 
   createTopic() {
-    this.topicsService.createTopic(this).then(() => {
-      this.router.navigate(['/topics']);
-    });
+    console.log('Creating topic', this.title, this.description);
+    this.topicsService.createTopic(this);
+    this.router.navigate(['/topics']);
   }
 
 

@@ -10,7 +10,7 @@ import { PostsService } from '../posts.service';
   styleUrl: './post-detail.component.scss'
 })
 export class PostDetailComponent implements OnInit {
-  postId!: number;
+  postId!: string;
   post: any;
 
   constructor(
@@ -21,7 +21,7 @@ export class PostDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.postId = +params['id'];
+      this.postId = params['id'];
       this.post = this.postsService.getPostById(this.postId);
     });
   }

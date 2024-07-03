@@ -21,7 +21,7 @@ export class TopicsService {
     return this.topics.getOne(id);
   }
 
-  createTopic(topic: CreateTopicComponent) {
+  createTopic(topic: any) {
     return this.topics.create(topic);
   }
 
