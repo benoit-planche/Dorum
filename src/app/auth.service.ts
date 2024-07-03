@@ -22,4 +22,8 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.isAuthenticated;
   }
+
+  getCurrentUser(): string {
+    return this.isAuthenticated ? 'admin' : '';
+  }
 }
