@@ -5,9 +5,10 @@
     <li *ngFor="let post of paginatedPosts; trackBy: trackById">
       <h4><a [routerLink]="['/post', post.id]">{{ post.title }}</a></h4>
       <p>{{ post.content | truncate:80 }}</p>
+      <small>By: {{ post.author }}</small>
     </li>
   </ul>
-  <button routerLink="/create-post">Create Post</button>
+  <button routerLink="/create-post/{{ topic?.id }}">Create Post</button>
   <button class="buttonReturn" routerLink="/topics">Back to Topics</button>
   <mat-paginator [length]="posts.length" [pageSize]="getSizePage()" (page)="onPageChange($event)"></mat-paginator>
 </div>

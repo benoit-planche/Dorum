@@ -44,7 +44,9 @@ export class PostsService {
   }
 
   createPost(post: any) {
+    post.id = this.posts.length + 1;
     this.posts.push(post);
+    console.log(this.posts);
   }
 
   updatePost(id: number, updatedPost: any) {

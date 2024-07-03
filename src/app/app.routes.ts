@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'topics/:id', component: TopicPostsComponent, canActivate: [AuthGuard] },
   { path: 'post/:id', component: PostDetailComponent, canActivate: [AuthGuard] },
   { path: 'create-topic', component: CreateTopicComponent, canActivate: [AuthGuard] },
-  { path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard] },
+  { path: 'create-post/:topicId', component: CreatePostComponent, canActivate: [AuthGuard] },
   { path: 'edit-topic/:id', component: EditTopicComponent, canActivate: [AuthGuard] },
   { path: 'edit-post/:id', component: EditPostComponent, canActivate: [AuthGuard] },
 ];
