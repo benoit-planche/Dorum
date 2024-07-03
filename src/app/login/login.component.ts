@@ -12,15 +12,18 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent {
   username = '';
+  email = '';
   password = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    if (this.authService.login(this.username, this.password)) {
-      this.router.navigate(['/topics']);
-    } else {
-      alert('Invalid credentials');
-    }
+    this.authService.login(this.email, this.password);
+    this.router.navigate(['/topics']);
+  }
+
+  signup() {
+    this.authService.signup(this.username, this.email, this.password);
+    this.router.navigate(['/topics']);
   }
 }

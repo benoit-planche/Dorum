@@ -32,7 +32,7 @@ export class CreatePostComponent {
     this.route.params.subscribe((params) => {
       this.post.topicId = +params['topicId'];
     });
-    this.post.author = this.authService.getCurrentUser(); // Set current user as author
+    //this.post.author = this.authService.getCurrentUser() // Set current user as author
   }
 
   createPost() {

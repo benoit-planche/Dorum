@@ -1,29 +1,36 @@
 import { Injectable } from '@angular/core';
+import { PocketBaseService } from './pocketbase.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private isAuthenticated = false;
+  constructor(private pocketBaseService: PocketBaseService) {}
 
-  login(username: string, password: string): boolean {
-    if (username === 'admin' && password === 'admin') {
-      this.isAuthenticated = true;
-      return true;
+  async login(email: string, password: string) {
+    try {
+      await this.pocketBaseService.login(email, password);
+    } catch (error) {
+      alert(error);
     }
-    return false;
   }
 
-  logout(): void {
-    this.isAuthenticated = false;
+  async signup(username: string, email: string, password: string) {
+    try {
+      await this.pocketBaseService.signup(username, email, password);
+      await this.pocketBaseService.login(email, password);
+    } catch (error) {
+      console.error('Signup error:', error);
+      alert(error);
+    }
   }
 
-  isLoggedIn(): boolean {
-    return this.isAuthenticated;
+  logout() {
+    this.pocketBaseService.logout();
   }
 
-  getCurrentUser(): string {
-    return this.isAuthenticated ? 'admin' : '';
+  getCurrentUser() {
+    return this.pocketBaseService.getCurrentUser();
   }
 }
