@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PostsService } from '../posts.service';
 import { TopicsService } from '../topics.service';
-import { MatPaginator } from '@angular/material/paginator';
 import { TruncatePipe } from '../truncate.pipe';
 
 @Component({
@@ -18,7 +18,7 @@ export class TopicPostsComponent implements OnInit {
   topicId!: string;
   topic: any;
   posts: any[] = [];
-  paginatedPosts: any[] = [];
+  length = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,31 +26,35 @@ export class TopicPostsComponent implements OnInit {
     private topicsService: TopicsService
   ) {}
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.topic = this.topicsService.getTopicById(this.topicId);
-      this.postsService.getPostsByTopicId(this.topicId).then((posts) => {
-        this.posts = posts;
-      });
+  ngOnInit() {
+    this.route.params.subscribe(async (params) => {
+      this.topicId = params['id'];
+      this.topic = await this.topicsService.getTopicById(this.topicId);
+      await this.fetchTotalPostsCount();
+      await this.fetchPosts();
     });
-    this.updatePaginatedPosts();
-  }
-
-  updatePaginatedPosts() {
-    this.paginatedPosts = this.posts.slice(
-      this.postsService.pageIndex * this.postsService.pageSize,
-      (this.postsService.pageIndex + 1) * this.postsService.pageSize
-    );
-  }
-
-  trackById(index: number, item: any): number {
-    return item.id;
   }
 
   onPageChange(event: any) {
     this.postsService.pageIndex = event.pageIndex;
     this.postsService.pageSize = event.pageSize;
-    this.updatePaginatedPosts();
+    this.fetchPosts();
+  }
+
+  async fetchPosts() {
+    await this.postsService.getPostsByTopicId(this.topicId).then((posts) => {
+      this.posts = posts;
+    });
+  }
+
+  async fetchTotalPostsCount() {
+    await this.postsService.getTotalPostsCount(this.topicId).then((count) => {
+      this.length = count;
+    });
+  }
+
+  trackById(index: number, item: any): number {
+    return item.id;
   }
 
   getSizePage() {

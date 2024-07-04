@@ -13,8 +13,14 @@ export class TopicsService {
 
   private topics = this.pocketBaseService.pb.collection('topics')
 
-  getTopics() {
-    return this.topics.getFullList();
+  async getTopics() {
+    const resultList = await this.topics.getList(this.pageIndex + 1, this.pageSize);
+    return resultList.items;
+  }
+
+  async getTotalTopicsCount() {
+    const result = await this.topics.getList(1, 1);
+    return result.totalItems;
   }
 
   getTopicById(id: string) {

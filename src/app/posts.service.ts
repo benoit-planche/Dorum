@@ -5,7 +5,6 @@ import { PocketBaseService } from './pocketbase.service';
   providedIn: 'root'
 })
 export class PostsService {
-
   pageSize = 5;
   pageIndex = 0;
 
@@ -13,18 +12,30 @@ export class PostsService {
 
   private posts = this.pocketBaseService.pb.collection('posts');
 
-  getPostsByTopicId(topicId: string) {
-    return this.posts.getFullList({
-      filters: `topicId: "${topicId}"`
+  async getPostsByTopicId(topicId: string): Promise<any[]> {
+    const resultList = await this.posts.getList(this.pageIndex + 1, this.pageSize, {
+      filter: `topicId="${topicId}"`
     });
+    return resultList.items;
   }
 
-  getPostById(id: string) {
-    return this.posts.getOne(id);
+  async getTotalPostsCount(topicId: string): Promise<number> {
+    const result = await this.posts.getList(1, 1, {
+      filter: `topicId="${topicId}"`
+    });
+    return result.totalItems;
   }
 
-  createPost(post: any) {
-    return this.posts.create(post);
+  async getPostById(id: string) {
+    return await this.posts.getOne(id);
+  }
+
+  async getList(start: number, end: number) {
+    return await this.posts.getList(start, end);
+  }
+
+  async createPost(post: any) {
+    return await this.posts.create(post);
   }
 
   updatePost(id: string, updatedPost: any) {

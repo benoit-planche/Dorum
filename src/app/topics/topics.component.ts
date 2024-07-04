@@ -22,35 +22,31 @@ import { CommonModule } from '@angular/common';
 })
 export class TopicsComponent implements OnInit{
   topics: any[] = [];
-  paginatedTopics: any[] = [];
+  length = 0;
 
   constructor(private topicsService: TopicsService) {}
 
   async ngOnInit() {
-    await this.updatePaginatedTopics();
-    this.topicsService.getTopics().then((topics) => {
-      this.topics = topics;
-    });
-  }
-
-  async updatePaginatedTopics() {
-    const startIndex = this.topicsService.pageIndex * this.topicsService.pageSize;
-    const endIndex = startIndex + this.topicsService.pageSize;
-    console.log('Start index', startIndex);
-    console.log('End index', endIndex);
-    await this.topicsService.getList(startIndex, endIndex).then((topics) => {
-      this.paginatedTopics = topics.items;
-    });
-    console.log('Paginated topic', this.paginatedTopics);
+    await this.fetchTopics();
+    await this.fetchTotalTopicsCount();
   }
 
   async onPageChange(event: any) {
     this.topicsService.pageIndex = event.pageIndex;
     this.topicsService.pageSize = event.pageSize;
-    console.log('Page index', this.topicsService.pageIndex);
-    console.log('Page size', this.topicsService.pageSize);
-    await this.updatePaginatedTopics();
+    await this.fetchTopics();
+  }
 
+  async fetchTopics() {
+    await this.topicsService.getTopics().then((topics) => {
+      this.topics = topics;
+    });
+  }
+
+  async fetchTotalTopicsCount() {
+    await this.topicsService.getTotalTopicsCount().then((count) => {
+      this.length = count;
+    });
   }
 
   trackById(index: number, item: any): number {

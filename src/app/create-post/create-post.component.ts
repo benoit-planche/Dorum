@@ -4,6 +4,8 @@ import { PostsService } from '../posts.service';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthModel } from 'pocketbase';
+import { CdkPortal } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-create-post',
@@ -14,8 +16,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class CreatePostComponent {
   post = {
-    id: 0,
-    topicId: 0,
+    id: '',
+    topicId: '',
     title: '',
     content: '',
     author: '', // Add author field
@@ -30,14 +32,18 @@ export class CreatePostComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.post.topicId = +params['topicId'];
+      this.post.topicId = params['topicId'];
     });
-    //this.post.author = this.authService.getCurrentUser() // Set current user as author
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      this.post.author = user['id'];
+    }
   }
 
   createPost() {
     console.log(this.post);
-    this.postsService.createPost(this.post);
-    this.router.navigate(['/topics', this.post.topicId]);
+    this.postsService.createPost(this.post).then(() => {
+      this.router.navigate(['/topics', this.post.topicId]);
+    });
   }
 }
