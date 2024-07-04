@@ -27,14 +27,14 @@ export class TopicsComponent implements OnInit{
   constructor(private topicsService: TopicsService) {}
 
   async ngOnInit() {
-    await this.fetchTopics();
     await this.fetchTotalTopicsCount();
+    await this.fetchTopics();
   }
 
-  async onPageChange(event: any) {
+  onPageChange(event: any) {
     this.topicsService.pageIndex = event.pageIndex;
     this.topicsService.pageSize = event.pageSize;
-    await this.fetchTopics();
+    this.fetchTopics();
   }
 
   async fetchTopics() {

@@ -23,20 +23,20 @@ export class TopicsService {
     return result.totalItems;
   }
 
-  getTopicById(id: string) {
-    return this.topics.getOne(id);
+  async getTopicById(id: string) {
+    return await this.topics.getOne(id);
   }
 
   async getList(start: number, end: number){
     return await this.topics.getList(start, end);
   }
 
-  createTopic(topic: CreateTopicComponent) {
+  async createTopic(topic: CreateTopicComponent) {
     const bodyParams = {
       title: topic.title,
       description: topic.description
     };
-    return this.topics.create(bodyParams);
+    return await this.topics.create(bodyParams);
   }
 
   updateTopic(id: string, updatedTopic: any) {

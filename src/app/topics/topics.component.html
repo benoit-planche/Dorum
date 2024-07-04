@@ -7,5 +7,5 @@
     </li>
   </ul>
   <button routerLink="/create-topic">Create Topic</button>
-  <mat-paginator [length]="topics.length" [pageSize]="getSizePage()" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)"></mat-paginator>
+  <mat-paginator [length]="this.length" [pageSize]="getSizePage()" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)"></mat-paginator>
 </div>
