@@ -21,8 +21,16 @@ export class TopicsService {
     return this.topics.getOne(id);
   }
 
-  createTopic(topic: any) {
-    return this.topics.create(topic);
+  async getList(start: number, end: number){
+    return await this.topics.getList(start, end);
+  }
+
+  createTopic(topic: CreateTopicComponent) {
+    const bodyParams = {
+      title: topic.title,
+      description: topic.description
+    };
+    return this.topics.create(bodyParams);
   }
 
   updateTopic(id: string, updatedTopic: any) {

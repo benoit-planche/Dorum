@@ -9,7 +9,7 @@ export class AuthService {
   constructor(private pocketBaseService: PocketBaseService) {}
 
   login(email: string, password: string) {
-    this.pocketBaseService.pb.collection('users').authWithPassword(email, password);
+    return this.pocketBaseService.pb.collection('users').authWithPassword(email, password);
   }
 
   async signup(username: string, email: string, password: string) {
@@ -20,7 +20,7 @@ export class AuthService {
         password,
         passwordConfirm: password
       });
-      this.login(email, password);
+      await this.login(email, password);
     } catch (error) {
       console.error('Signup error:', error);
       alert(error);

@@ -37,7 +37,10 @@ export class TopicPostsComponent implements OnInit {
   }
 
   updatePaginatedPosts() {
-    this.paginatedPosts = this.posts.slice(this.postsService.pageIndex * this.postsService.pageSize, (this.postsService.pageIndex + 1) * this.postsService.pageSize);
+    this.paginatedPosts = this.posts.slice(
+      this.postsService.pageIndex * this.postsService.pageSize,
+      (this.postsService.pageIndex + 1) * this.postsService.pageSize
+    );
   }
 
   trackById(index: number, item: any): number {

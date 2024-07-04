@@ -20,27 +20,37 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./topics.component.scss'],
   providers: [TopicsService],
 })
-export class TopicsComponent {
+export class TopicsComponent implements OnInit{
   topics: any[] = [];
   paginatedTopics: any[] = [];
 
   constructor(private topicsService: TopicsService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.updatePaginatedTopics();
     this.topicsService.getTopics().then((topics) => {
       this.topics = topics;
     });
-    this.updatePaginatedTopics();
   }
 
-  updatePaginatedTopics() {
-    this.paginatedTopics = this.topics.slice(this.topicsService.pageIndex * this.topicsService.pageSize, (this.topicsService.pageIndex + 1) * this.topicsService.pageSize);
+  async updatePaginatedTopics() {
+    const startIndex = this.topicsService.pageIndex * this.topicsService.pageSize;
+    const endIndex = startIndex + this.topicsService.pageSize;
+    console.log('Start index', startIndex);
+    console.log('End index', endIndex);
+    await this.topicsService.getList(startIndex, endIndex).then((topics) => {
+      this.paginatedTopics = topics.items;
+    });
+    console.log('Paginated topic', this.paginatedTopics);
   }
 
-  onPageChange(event: any) {
+  async onPageChange(event: any) {
     this.topicsService.pageIndex = event.pageIndex;
     this.topicsService.pageSize = event.pageSize;
-    this.updatePaginatedTopics();
+    console.log('Page index', this.topicsService.pageIndex);
+    console.log('Page size', this.topicsService.pageSize);
+    await this.updatePaginatedTopics();
+
   }
 
   trackById(index: number, item: any): number {

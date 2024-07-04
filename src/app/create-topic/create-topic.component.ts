@@ -22,5 +22,4 @@ export class CreateTopicComponent {
     this.router.navigate(['/topics']);
   }
 
-
 }

@@ -17,13 +17,13 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  login() {
-    this.authService.login(this.email, this.password);
+  async login() {
+    await this.authService.login(this.email, this.password);
     this.router.navigate(['/topics']);
   }
 
-  signup() {
-    this.authService.signup(this.username, this.email, this.password);
+  async signup() {
+    await this.authService.signup(this.username, this.email, this.password);
     this.router.navigate(['/topics']);
   }
 }
