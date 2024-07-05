@@ -35,7 +35,7 @@ export class TopicPostsComponent implements OnInit {
       this.topic = await this.topicsService.getTopicById(this.topicId);
       await this.fetchTotalPostsCount();
       await this.fetchPosts();
-      this.userEmail = await this.getEmailByAuthorId(this.topic.author);
+      this.userEmail = await this.getNameUserById(this.topic.author);
     });
   }
 
@@ -46,12 +46,14 @@ export class TopicPostsComponent implements OnInit {
   }
 
   async fetchPosts() {
-    await this.postsService.getPostsByTopicId(this.topicId).then(async (posts) => {
-      for (const post of posts) {
-        post.authorEmail = await this.getEmailByAuthorId(post.author);
-      }
-      this.posts = posts;
-    });
+    await this.postsService
+      .getPostsByTopicId(this.topicId)
+      .then(async (posts) => {
+        for (const post of posts) {
+          post.authorEmail = await this.getNameUserById(post.author);
+        }
+        this.posts = posts;
+      });
   }
 
   async fetchTotalPostsCount() {
@@ -66,7 +68,7 @@ export class TopicPostsComponent implements OnInit {
 
   getCurrentUserId() {
     let userid = '';
-    const  user = this.authService.getCurrentUser();
+    const user = this.authService.getCurrentUser();
     if (user) {
       userid = user['id'];
     }
@@ -75,7 +77,7 @@ export class TopicPostsComponent implements OnInit {
 
   getCurrentEmail() {
     let email = '';
-    const  user = this.authService.getCurrentUser();
+    const user = this.authService.getCurrentUser();
     if (user) {
       email = user['email'];
     }
@@ -90,12 +92,12 @@ export class TopicPostsComponent implements OnInit {
     this.topicsService.deleteTopic(this.topicId);
   }
 
-  async getEmailByAuthorId(authorId: string) {
+  async getNameUserById(authorId: string) {
     console.log('authorId (component)', authorId);
     if (!authorId) {
       return '';
     }
-    const email = await this.postsService.getEmailByAuthorId(authorId);
+    const email = await this.postsService.getNameUserById(authorId);
     return email;
   }
 }

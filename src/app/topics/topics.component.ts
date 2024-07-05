@@ -21,11 +21,14 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./topics.component.scss'],
   providers: [TopicsService],
 })
-export class TopicsComponent implements OnInit{
+export class TopicsComponent implements OnInit {
   topics: any[] = [];
   length = 0;
 
-  constructor(private topicsService: TopicsService, private authService: AuthService) {}
+  constructor(
+    private topicsService: TopicsService,
+    private authService: AuthService
+  ) {}
 
   async ngOnInit() {
     await this.fetchTotalTopicsCount();
@@ -41,7 +44,7 @@ export class TopicsComponent implements OnInit{
   async fetchTopics() {
     await this.topicsService.getTopics().then(async (topics) => {
       for (const topic of topics) {
-        topic.authorEmail = await this.getEmailByAuthorId(topic.author);
+        topic.authorEmail = await this.getNameUserById(topic.author);
       }
       this.topics = topics;
     });
@@ -61,12 +64,12 @@ export class TopicsComponent implements OnInit{
     return this.topicsService.pageSize;
   }
 
-  async getEmailByAuthorId(authorId: string) {
+  async getNameUserById(authorId: string) {
     console.log('authorId (component)', authorId);
     if (!authorId) {
       return '';
     }
-    const email = await this.topicsService.getUserEmailById(authorId);
+    const email = await this.topicsService.getNameUserById(authorId);
     return email;
   }
 }

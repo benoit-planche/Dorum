@@ -3,18 +3,21 @@ import { CreateTopicComponent } from './create-topic/create-topic.component';
 import { PocketBaseService } from './pocketbase.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TopicsService {
   pageIndex = 0;
   pageSize = 5;
 
-  constructor( private pocketBaseService: PocketBaseService) {}
+  constructor(private pocketBaseService: PocketBaseService) {}
 
-  private topics = this.pocketBaseService.pb.collection('topics')
+  private topics = this.pocketBaseService.pb.collection('topics');
 
   async getTopics(): Promise<any[]> {
-    const resultList = await this.topics.getList(this.pageIndex + 1, this.pageSize);
+    const resultList = await this.topics.getList(
+      this.pageIndex + 1,
+      this.pageSize
+    );
     return resultList.items;
   }
 
@@ -27,7 +30,7 @@ export class TopicsService {
     return await this.topics.getOne(id);
   }
 
-  async getList(start: number, end: number){
+  async getList(start: number, end: number) {
     return await this.topics.getList(start, end);
   }
 
@@ -44,14 +47,16 @@ export class TopicsService {
     this.topics.delete(id);
   }
 
-  async getUserEmailById(authorId: string) {
-    const email = await this.pocketBaseService.getUserEmailById(authorId);
+  async getNameUserById(authorId: string) {
+    const email = await this.pocketBaseService.getNameUserById(authorId);
     return email;
   }
 
   async deleteAllPostsByTopicId(topicId: string) {
-    const postsInTopic = await this.pocketBaseService.pb.collection('posts').getList(0, -1, { filter: `topicId="${topicId}"` });
-    postsInTopic.items.forEach(post => {
+    const postsInTopic = await this.pocketBaseService.pb
+      .collection('posts')
+      .getList(0, -1, { filter: `topicId="${topicId}"` });
+    postsInTopic.items.forEach((post) => {
       this.pocketBaseService.pb.collection('posts').delete(post.id);
     });
   }

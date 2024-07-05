@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  username = '';
   email = '';
   password = '';
 
@@ -23,7 +22,7 @@ export class LoginComponent {
   }
 
   async signup() {
-    await this.authService.signup(this.username, this.email, this.password);
+    await this.authService.signup(this.email, this.password);
     this.router.navigate(['/topics']);
   }
 }

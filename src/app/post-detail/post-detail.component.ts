@@ -36,18 +36,9 @@ export class PostDetailComponent implements OnInit {
     let userid = '';
     const  user = this.authService.getCurrentUser();
     if (user) {
-      userid = user['id'];
+      userid = user.id;
     }
     return userid;
-  }
-
-  getCurrentUsername() {
-    let username = '';
-    const user = this.authService.getCurrentUser();
-    if (user) {
-      username = user['email'];
-    }
-    return username;
   }
 
   async deletePost() {

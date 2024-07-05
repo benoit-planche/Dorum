@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import PocketBase from 'pocketbase';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PocketBaseService {
   pb: PocketBase;
@@ -15,7 +15,7 @@ export class PocketBaseService {
   // Post methods
   async getPostsByTopicId(topicId: string) {
     return await this.pb.collection('posts').getFullList({
-      filter: `topicId="${topicId}"`
+      filter: `topicId="${topicId}"`,
     });
   }
 
@@ -27,13 +27,9 @@ export class PocketBaseService {
     return await this.pb.collection('posts').create(post);
   }
 
-  async getUserNameByUserId(userId: string) {
-    return await this.pb.collection('users').getOne(userId);
-  }
-
-  async getUserEmailById(userId: string): Promise<string> {
+  async getNameUserById(userId: string): Promise<string> {
     console.log('userId', userId);
     const user = await this.pb.collection('users').getOne(userId);
-    return user['email'];
+    return user['name'];
   }
 }

@@ -12,13 +12,16 @@ export class AuthService {
     return this.pocketBaseService.pb.collection('users').authWithPassword(email, password);
   }
 
-  async signup(username: string, email: string, password: string) {
+  async signup(email: string, password: string) {
+    console.log('email:', email, 'password:', password)
+    const name = email.split('@')[0];
+    console.log('email:', email, 'password:', password, 'name:', name);
     try {
-      this.pocketBaseService.pb.collection('users').create({
-        username,
+      await this.pocketBaseService.pb.collection('users').create({
         email,
         password,
-        passwordConfirm: password
+        passwordConfirm: password,
+        name
       });
       await this.login(email, password);
     } catch (error) {
@@ -31,7 +34,7 @@ export class AuthService {
     this.pocketBaseService.pb.authStore.clear();
   }
 
-  getCurrentUser() {
+  getCurrentUser(): any {
     return this.pocketBaseService.pb.authStore.model;
   }
 

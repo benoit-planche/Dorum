@@ -2,26 +2,30 @@ import { Injectable } from '@angular/core';
 import { PocketBaseService } from './pocketbase.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostsService {
   pageSize = 5;
   pageIndex = 0;
 
-  constructor( private pocketBaseService: PocketBaseService) {}
+  constructor(private pocketBaseService: PocketBaseService) {}
 
   private posts = this.pocketBaseService.pb.collection('posts');
 
   async getPostsByTopicId(topicId: string): Promise<any[]> {
-    const resultList = await this.posts.getList(this.pageIndex + 1, this.pageSize, {
-      filter: `topicId="${topicId}"`
-    });
+    const resultList = await this.posts.getList(
+      this.pageIndex + 1,
+      this.pageSize,
+      {
+        filter: `topicId="${topicId}"`,
+      }
+    );
     return resultList.items;
   }
 
   async getTotalPostsCount(topicId: string): Promise<number> {
     const result = await this.posts.getList(1, 1, {
-      filter: `topicId="${topicId}"`
+      filter: `topicId="${topicId}"`,
     });
     return result.totalItems;
   }
@@ -46,9 +50,9 @@ export class PostsService {
     return await this.posts.delete(id);
   }
 
-  async getEmailByAuthorId(authorId: string) {
+  async getNameUserById(authorId: string) {
     console.log('authorId', authorId);
-    const email = await this.pocketBaseService.getUserEmailById(authorId);
+    const email = await this.pocketBaseService.getNameUserById(authorId);
     console.log('email', email);
     return email;
   }
