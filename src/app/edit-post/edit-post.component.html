@@ -1,1 +1,8 @@
-<p>edit-post works!</p>
+<div class="edit-post-container">
+  <h2>Edite Post</h2>
+  <form (ngSubmit)="editPost()">
+    <input type="text" [(ngModel)]="post.title" name="title" value="{{post.title}}" required />
+    <textarea [(ngModel)]="post.content" name="content" placeholder="{{post.content}}" rows="5" required></textarea>
+    <button type="submit">Create Post</button>
+  </form>
+</div>

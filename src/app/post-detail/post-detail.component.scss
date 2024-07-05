@@ -41,6 +41,10 @@ button {
   font-family: 'Arial', sans-serif;
 }
 
+button:hover {
+  background-color: #0056b3;
+}
+
 button.buttonReturn {
   background-color: #555;
 }
@@ -49,6 +53,18 @@ button.buttonReturn:hover {
   background-color: #333;
 }
 
-button:hover {
-  background-color: #0056b3;
+button.buttonEdit {
+  background-color: #28a745;
+}
+
+button.buttonEdit:hover {
+  background-color: #218838;
+}
+
+button.buttonDelete {
+  background-color: #dc3545;
+}
+
+button.buttonDelete:hover {
+  background-color: #c82333;
 }

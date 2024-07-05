@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostsService } from '../posts.service';
@@ -16,17 +17,36 @@ export class PostDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private postsService: PostsService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((async (params) => {
       this.postId = params['id'];
-      this.post = this.postsService.getPostById(this.postId);
-    });
+      this.post = await this.postsService.getPostById(this.postId);
+    }));
   }
 
   goBack() {
     this.router.navigate(['/topics/' + this.post.topicId]);
+  }
+
+  getCurrentUser() {
+    let userid = '';
+    const  user = this.authService.getCurrentUser();
+    if (user) {
+      userid = user['id'];
+    }
+    return userid;
+  }
+
+  async deletePost() {
+    await this.postsService.deletePost(this.postId);
+    this.router.navigate(['/topics/' + this.post.topicId]);
+  }
+
+  editPost() {
+    this.router.navigate(['/edit-post/' + this.postId]);
   }
 }

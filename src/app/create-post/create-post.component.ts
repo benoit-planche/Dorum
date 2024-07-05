@@ -4,8 +4,6 @@ import { PostsService } from '../posts.service';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthModel } from 'pocketbase';
-import { CdkPortal } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-create-post',
@@ -41,7 +39,6 @@ export class CreatePostComponent {
   }
 
   createPost() {
-    console.log(this.post);
     this.postsService.createPost(this.post).then(() => {
       this.router.navigate(['/topics', this.post.topicId]);
     });

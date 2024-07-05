@@ -38,11 +38,11 @@ export class PostsService {
     return await this.posts.create(post);
   }
 
-  updatePost(id: string, updatedPost: any) {
-    this.posts.update(id, updatedPost);
+  async updatePost(id: string, updatedPost: any) {
+    return await this.posts.update(id, updatedPost);
   }
 
-  deletePost(id: string) {
-    this.posts.delete(id);
+  async deletePost(id: string) {
+    return await this.posts.delete(id);
   }
 }
