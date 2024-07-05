@@ -2,7 +2,7 @@ import { AuthService } from './../auth.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PostsService } from '../posts.service';
 import { TopicsService } from '../topics.service';
 import { TruncatePipe } from '../truncate.pipe';
@@ -24,6 +24,7 @@ export class TopicPostsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private postsService: PostsService,
     private topicsService: TopicsService,
     private authService: AuthService
@@ -90,6 +91,7 @@ export class TopicPostsComponent implements OnInit {
 
   deleteTopic() {
     this.topicsService.deleteTopic(this.topicId);
+    this.router.navigate(['/topics']);
   }
 
   async getNameUserById(authorId: string) {
