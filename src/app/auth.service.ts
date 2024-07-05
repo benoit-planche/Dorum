@@ -8,14 +8,12 @@ export class AuthService {
 
   constructor(private pocketBaseService: PocketBaseService) {}
 
-  login(email: string, password: string) {
-    return this.pocketBaseService.pb.collection('users').authWithPassword(email, password);
+  async login(email: string, password: string) {
+    await this.pocketBaseService.pb.collection('users').authWithPassword(email, password);
   }
 
   async signup(email: string, password: string) {
-    console.log('email:', email, 'password:', password)
     const name = email.split('@')[0];
-    console.log('email:', email, 'password:', password, 'name:', name);
     try {
       await this.pocketBaseService.pb.collection('users').create({
         email,
@@ -23,11 +21,11 @@ export class AuthService {
         passwordConfirm: password,
         name
       });
-      await this.login(email, password);
     } catch (error) {
       console.error('Signup error:', error);
       alert(error);
     }
+    await this.login(email, password);
   }
 
   logout() {
