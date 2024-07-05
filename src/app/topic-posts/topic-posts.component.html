@@ -1,6 +1,7 @@
 <div class="topic-posts-container">
   <h2>{{ topic?.title }}</h2>
   <p>{{ topic?.description }}</p>
+  <small>By: {{ topic?.author }}</small>
   <ul>
     <li *ngFor="let post of posts; trackBy: trackById">
       <h4><a [routerLink]="['/post', post.id]">{{ post.title }}</a></h4>
@@ -8,7 +9,13 @@
       <small>By: {{ post.author }}</small>
     </li>
   </ul>
-  <button routerLink="/create-post/{{ topicId}}">Create Post</button>
-  <button class="buttonReturn" routerLink="/topics">Back to Topics</button>
+  <div class="button-group">
+    <button routerLink="/create-post/{{ topicId}}">Create Post</button>
+    <button class="buttonReturn" routerLink="/topics">Back to Topics</button>
+    @if (topic?.author == getCurrentUser()) {
+      <button class="buttonEdit" routerLink="/edit-topic/{{ topic?.id }}">Edit Topic</button>
+      <button class="buttonDelete" (click)="deleteTopic()">Delete Topic</button>
+    }
+  </div>
   <mat-paginator [length]="length" [pageSize]="getSizePage()" [pageSizeOptions]="[5, 10, 20]" (page)="onPageChange($event)"></mat-paginator>
 </div>

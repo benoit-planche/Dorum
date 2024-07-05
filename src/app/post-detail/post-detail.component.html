@@ -3,9 +3,11 @@
   <h6> {{post?.author}} à écrit le post suivant :  </h6>
   <h2>{{ post?.title }}</h2>
   <p>{{ post?.content }}</p>
-  <button class="buttonReturn" (click)="goBack()">Back to Posts</button>
-  @if (post?.author==getCurrentUser()) {
-    <button class="buttonEdit" (click)="editPost()">Edit Post</button>
-    <button class="buttonDelete" (click)="deletePost()">Delete Post</button>
-  }
+  <div class="button-group">
+    <button class="buttonReturn" (click)="goBack()">Back to Posts</button>
+    @if (post?.author==getCurrentUser()) {
+      <button class="buttonEdit" (click)="editPost()">Edit Post</button>
+      <button class="buttonDelete" (click)="deletePost()">Delete Post</button>
+    }
+  </div>
 </div>

@@ -39,11 +39,19 @@ export class TopicsService {
     return await this.topics.create(bodyParams);
   }
 
-  updateTopic(id: string, updatedTopic: any) {
-    this.topics.update(id, updatedTopic);
+  async updateTopic(id: string, updatedTopic: any) {
+    await this.topics.update(id, updatedTopic);
   }
 
-  deleteTopic(id: string) {
+  async deleteTopic(id: string) {
+    await this.deleteAllPostsByTopicId(id);
     this.topics.delete(id);
+  }
+
+  async deleteAllPostsByTopicId(topicId: string) {
+    const postsInTopic = await this.pocketBaseService.pb.collection('posts').getList(0, -1, { filter: `topicId="${topicId}"` });
+    postsInTopic.items.forEach(post => {
+      this.pocketBaseService.pb.collection('posts').delete(post.id);
+    });
   }
 }

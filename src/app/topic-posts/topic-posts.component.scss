@@ -77,3 +77,25 @@ button.buttonReturn:hover {
 button:hover {
   background-color: #0056b3;
 }
+
+button.buttonEdit {
+  background-color: #28a745;
+}
+
+button.buttonEdit:hover {
+  background-color: #218838;
+}
+
+button.buttonDelete {
+  background-color: #dc3545;
+}
+
+button.buttonDelete:hover {
+  background-color: #c82333;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}

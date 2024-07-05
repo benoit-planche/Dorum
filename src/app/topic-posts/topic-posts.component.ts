@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -23,7 +24,8 @@ export class TopicPostsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private postsService: PostsService,
-    private topicsService: TopicsService
+    private topicsService: TopicsService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -57,7 +59,20 @@ export class TopicPostsComponent implements OnInit {
     return item.id;
   }
 
+  getCurrentUser() {
+    let userid = '';
+    const  user = this.authService.getCurrentUser();
+    if (user) {
+      userid = user['id'];
+    }
+    return userid;
+  }
+
   getSizePage() {
     return this.postsService.pageSize;
+  }
+
+  deleteTopic() {
+    this.topicsService.deleteTopic(this.topicId);
   }
 }
