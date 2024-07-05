@@ -1,5 +1,5 @@
 import { TopicsService } from './../topics.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
@@ -11,7 +11,7 @@ import { AuthService } from '../auth.service';
   templateUrl: './create-topic.component.html',
   styleUrl: './create-topic.component.scss'
 })
-export class CreateTopicComponent {
+export class CreateTopicComponent implements OnInit{
   topic = {
     title: '',
     description: '',
@@ -22,7 +22,7 @@ export class CreateTopicComponent {
     private router: Router,
     private authService: AuthService) {}
 
-  ngInit() {
+  ngOnInit() {
     const user = this.authService.getCurrentUser();
     if (user) {
       this.topic.author = user['id'];

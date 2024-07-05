@@ -25,6 +25,7 @@ export class PostDetailComponent implements OnInit {
     this.route.params.subscribe((async (params) => {
       this.postId = params['id'];
       this.post = await this.postsService.getPostById(this.postId);
+      this.post.authorName = await this.getNameUserById(this.post.author);
     }));
   }
 
@@ -48,5 +49,13 @@ export class PostDetailComponent implements OnInit {
 
   editPost() {
     this.router.navigate(['/edit-post/' + this.postId]);
+  }
+
+  async getNameUserById(authorId: string) {
+    if (!authorId) {
+      return '';
+    }
+    const email = await this.postsService.getNameUserById(authorId);
+    return email;
   }
 }

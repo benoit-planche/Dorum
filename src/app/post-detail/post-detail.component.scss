@@ -68,3 +68,8 @@ button.buttonDelete {
 button.buttonDelete:hover {
   background-color: #c82333;
 }
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
