@@ -20,6 +20,7 @@ export class TopicPostsComponent implements OnInit {
   topic: any;
   posts: any[] = [];
   length = 0;
+  userEmail = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +35,7 @@ export class TopicPostsComponent implements OnInit {
       this.topic = await this.topicsService.getTopicById(this.topicId);
       await this.fetchTotalPostsCount();
       await this.fetchPosts();
+      this.userEmail = await this.getEmailByAuthorId(this.topic.author);
     });
   }
 
@@ -59,7 +61,7 @@ export class TopicPostsComponent implements OnInit {
     return item.id;
   }
 
-  getCurrentUser() {
+  getCurrentUserId() {
     let userid = '';
     const  user = this.authService.getCurrentUser();
     if (user) {
@@ -68,11 +70,25 @@ export class TopicPostsComponent implements OnInit {
     return userid;
   }
 
+  getCurrentUsername() {
+    let username = '';
+    const  user = this.authService.getCurrentUser();
+    if (user) {
+      username = user['email'];
+    }
+    return username;
+  }
+
   getSizePage() {
     return this.postsService.pageSize;
   }
 
   deleteTopic() {
     this.topicsService.deleteTopic(this.topicId);
+  }
+
+  async getEmailByAuthorId(authorId: string) {
+    const email = await this.postsService.getEmailByAuthorId(authorId);
+    return email;
   }
 }

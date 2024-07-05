@@ -32,13 +32,22 @@ export class PostDetailComponent implements OnInit {
     this.router.navigate(['/topics/' + this.post.topicId]);
   }
 
-  getCurrentUser() {
+  getCurrentUserId() {
     let userid = '';
     const  user = this.authService.getCurrentUser();
     if (user) {
       userid = user['id'];
     }
     return userid;
+  }
+
+  getCurrentUsername() {
+    let username = '';
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      username = user['email'];
+    }
+    return username;
   }
 
   async deletePost() {

@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { ListElementComponent } from '../list-element/list-element.component';
 import { TopicsService } from '../topics.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../auth.service';
 
 @Component({
   standalone: true,
@@ -24,7 +25,7 @@ export class TopicsComponent implements OnInit{
   topics: any[] = [];
   length = 0;
 
-  constructor(private topicsService: TopicsService) {}
+  constructor(private topicsService: TopicsService, private authService: AuthService) {}
 
   async ngOnInit() {
     await this.fetchTotalTopicsCount();
@@ -47,6 +48,15 @@ export class TopicsComponent implements OnInit{
     await this.topicsService.getTotalTopicsCount().then((count) => {
       this.length = count;
     });
+  }
+
+  getCurrentUsername() {
+    let username = '';
+    const user = this.authService.getCurrentUser();
+    if (user) {
+      username = user['email'];
+    }
+    return username;
   }
 
   trackById(index: number, item: any): number {

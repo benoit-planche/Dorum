@@ -26,4 +26,13 @@ export class PocketBaseService {
   async createPost(post: any) {
     return await this.pb.collection('posts').create(post);
   }
+
+  async getUserNameByUserId(userId: string) {
+    return await this.pb.collection('users').getOne(userId);
+  }
+
+  async getEmailByUserId(userId: string) {
+    const user = await this.pb.collection('users').getOne(userId);
+    return user['email'];
+  }
 }

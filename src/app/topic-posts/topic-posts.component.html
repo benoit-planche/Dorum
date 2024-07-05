@@ -1,19 +1,19 @@
 <div class="topic-posts-container">
   <h2>{{ topic?.title }}</h2>
   <p>{{ topic?.description }}</p>
-  <small>By: {{ topic?.author }}</small>
+  <small>By: {{ getCurrentUsername() }}</small>
   <ul>
     <h3>Posts</h3>
     <li *ngFor="let post of posts; trackBy: trackById">
       <h4><a [routerLink]="['/post', post.id]">{{ post.title }}</a></h4>
       <p>{{ post.content | truncate:80 }}</p>
-      <small>By: {{ post.author }}</small>
+      <small>By: {{ userEmail }}</small>
     </li>
   </ul>
   <div class="button-group">
     <button routerLink="/create-post/{{ topicId}}">Create Post</button>
     <button class="buttonReturn" routerLink="/topics">Back to Topics</button>
-    @if (topic?.author == getCurrentUser()) {
+    @if (topic?.author == getCurrentUserId()) {
       <button class="buttonEdit" routerLink="/edit-topic/{{ topic?.id }}">Edit Topic</button>
       <button class="buttonDelete" (click)="deleteTopic()">Delete Topic</button>
     }

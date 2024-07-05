@@ -45,4 +45,8 @@ export class PostsService {
   async deletePost(id: string) {
     return await this.posts.delete(id);
   }
+
+  async getEmailByAuthorId(authorId: string) {
+    return await this.pocketBaseService.getEmailByUserId(authorId);
+  }
 }
