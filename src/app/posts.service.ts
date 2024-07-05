@@ -51,9 +51,7 @@ export class PostsService {
   }
 
   async getNameUserById(authorId: string) {
-    console.log('authorId', authorId);
     const email = await this.pocketBaseService.getNameUserById(authorId);
-    console.log('email', email);
     return email;
   }
 }

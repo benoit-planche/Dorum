@@ -28,7 +28,6 @@ export class PocketBaseService {
   }
 
   async getNameUserById(userId: string): Promise<string> {
-    console.log('userId', userId);
     const user = await this.pb.collection('users').getOne(userId);
     return user['name'];
   }

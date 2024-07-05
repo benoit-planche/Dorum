@@ -93,7 +93,6 @@ export class TopicPostsComponent implements OnInit {
   }
 
   async getNameUserById(authorId: string) {
-    console.log('authorId (component)', authorId);
     if (!authorId) {
       return '';
     }
