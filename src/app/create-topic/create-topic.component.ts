@@ -16,10 +16,12 @@ export class CreateTopicComponent {
 
   constructor(private topicsService: TopicsService, private router: Router) {}
 
-  createTopic() {
+  async createTopic() {
     console.log('Creating topic', this.title, this.description);
-    this.topicsService.createTopic(this);
-    this.router.navigate(['/topics']);
+    const newtopic = await this.topicsService.createTopic(this);
+    if (newtopic) {
+      this.router.navigate(['/topics/' + newtopic.id]);
+    }
   }
 
 }
