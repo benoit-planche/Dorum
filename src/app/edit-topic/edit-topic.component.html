@@ -1,8 +1,8 @@
-<div class="edit-post-container">
-  <h2>Edite Post</h2>
+<div class="edit-topic-container">
+  <h2>Edite Topic</h2>
   <form (ngSubmit)="editTopic()">
     <input type="text" [(ngModel)]="topic.title" name="title" value="{{topic.title}}" required />
-    <textarea [(ngModel)]="topic.content" name="content" placeholder="{{topic.content}}" rows="5" required></textarea>
+    <textarea [(ngModel)]="topic.description" name="description" placeholder="{{topic.description}}" rows="5" required></textarea>
     <button type="submit">Edit topic</button>
   </form>
 </div>

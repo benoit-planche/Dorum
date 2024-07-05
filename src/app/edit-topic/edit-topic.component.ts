@@ -28,7 +28,7 @@ export class EditTopicComponent implements OnInit {
 
   editTopic() {
     this.topicsService.updateTopic(this.topic.id, this.topic).then(() => {
-      this.router.navigate(['/topics', this.topic.topicId]);
+      this.router.navigate(['/topics', this.topic.id]);
     });
   }
 
