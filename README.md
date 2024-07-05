@@ -1,27 +1,47 @@
 # Dorum
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.5.
+Welcome to Dorum! This is a project built with Angular.
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+To get started with Dorum, follow these steps:
 
-## Code scaffolding
+1. Clone the repository: `git clone https://github.com/benoit-planche/dorum.git`
+2. Navigate to the project directory: `cd dorum`
+3. Install the dependencies: `npm install`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Usage
 
-## Build
+To run Dorum locally, use the following command:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+\```bash
+ng serve
+\```
 
-## Running unit tests
+Then, open your browser and navigate to `http://localhost:4200` to access the application.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## How to set up PocketBase
 
-## Running end-to-end tests
+To set up PocketBase for Dorum, follow these steps:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Install PocketBase globally: `npm install -g pocketbase`
+2. Navigate to the project directory: `cd pocketbase`
+3. Start PocketBase: `./pocketbase serve`
+4. REST API: http://127.0.0.1:8090/api/
+  Admin UI: http://127.0.0.1:8090/_/
 
-## Further help
+That's it! You have successfully set up PocketBase for Dorum.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Contributing
+
+We welcome contributions from the community! If you'd like to contribute to Dorum, please follow these guidelines:
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/your-feature-name`
+3. Make your changes and commit them: `git commit -m 'Add your feature'`
+4. Push to your branch: `git push origin feature/your-feature-name`
+5. Open a pull request.
+
+## License
+
+Dorum is released under the MIT License. See [LICENSE](LICENSE) for more information.
