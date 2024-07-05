@@ -1,0 +1,10 @@
+@if (isAuthenticated) {
+  <header class="header-container">
+    <nav>
+      <ul>
+        <li><a routerLink="/topics">Home</a></li>
+        <li><button (click)="logout()">Logout</button></li>
+      </ul>
+    </nav>
+  </header>
+}
