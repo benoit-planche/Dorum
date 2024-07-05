@@ -4,7 +4,7 @@
     <li *ngFor="let element of topics; trackBy: trackById">
       <h4><a [routerLink]="['/topics', element.id]">{{ element.title }}</a></h4>
       <p>{{ element.description }}</p>
-      <small>Created by: {{ getCurrentUsername() }}</small>
+      <small>Created by: {{ element.authorEmail }}</small>
     </li>
   </ul>
   <button routerLink="/create-topic">Create Topic</button>

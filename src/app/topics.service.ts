@@ -13,7 +13,7 @@ export class TopicsService {
 
   private topics = this.pocketBaseService.pb.collection('topics')
 
-  async getTopics() {
+  async getTopics(): Promise<any[]> {
     const resultList = await this.topics.getList(this.pageIndex + 1, this.pageSize);
     return resultList.items;
   }
@@ -31,12 +31,8 @@ export class TopicsService {
     return await this.topics.getList(start, end);
   }
 
-  async createTopic(topic: CreateTopicComponent) {
-    const bodyParams = {
-      title: topic.title,
-      description: topic.description
-    };
-    return await this.topics.create(bodyParams);
+  async createTopic(topic: any) {
+    return await this.topics.create(topic);
   }
 
   async updateTopic(id: string, updatedTopic: any) {
@@ -46,6 +42,11 @@ export class TopicsService {
   async deleteTopic(id: string) {
     await this.deleteAllPostsByTopicId(id);
     this.topics.delete(id);
+  }
+
+  async getUserEmailById(authorId: string) {
+    const email = await this.pocketBaseService.getUserEmailById(authorId);
+    return email;
   }
 
   async deleteAllPostsByTopicId(topicId: string) {

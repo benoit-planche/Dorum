@@ -1,13 +1,13 @@
 <div class="topic-posts-container">
   <h2>{{ topic?.title }}</h2>
   <p>{{ topic?.description }}</p>
-  <small>By: {{ getCurrentUsername() }}</small>
+  <small>By: {{ userEmail }}</small>
   <ul>
     <h3>Posts</h3>
     <li *ngFor="let post of posts; trackBy: trackById">
       <h4><a [routerLink]="['/post', post.id]">{{ post.title }}</a></h4>
       <p>{{ post.content | truncate:80 }}</p>
-      <small>By: {{ userEmail }}</small>
+      <small>By: {{ post.authorEmail }}</small>
     </li>
   </ul>
   <div class="button-group">

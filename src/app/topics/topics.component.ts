@@ -39,7 +39,10 @@ export class TopicsComponent implements OnInit{
   }
 
   async fetchTopics() {
-    await this.topicsService.getTopics().then((topics) => {
+    await this.topicsService.getTopics().then(async (topics) => {
+      for (const topic of topics) {
+        topic.authorEmail = await this.getEmailByAuthorId(topic.author);
+      }
       this.topics = topics;
     });
   }
@@ -50,20 +53,20 @@ export class TopicsComponent implements OnInit{
     });
   }
 
-  getCurrentUsername() {
-    let username = '';
-    const user = this.authService.getCurrentUser();
-    if (user) {
-      username = user['email'];
-    }
-    return username;
-  }
-
   trackById(index: number, item: any): number {
     return item.id;
   }
 
   getSizePage() {
     return this.topicsService.pageSize;
+  }
+
+  async getEmailByAuthorId(authorId: string) {
+    console.log('authorId (component)', authorId);
+    if (!authorId) {
+      return '';
+    }
+    const email = await this.topicsService.getUserEmailById(authorId);
+    return email;
   }
 }

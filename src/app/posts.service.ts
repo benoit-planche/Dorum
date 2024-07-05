@@ -47,6 +47,9 @@ export class PostsService {
   }
 
   async getEmailByAuthorId(authorId: string) {
-    return await this.pocketBaseService.getEmailByUserId(authorId);
+    console.log('authorId', authorId);
+    const email = await this.pocketBaseService.getUserEmailById(authorId);
+    console.log('email', email);
+    return email;
   }
 }

@@ -46,7 +46,10 @@ export class TopicPostsComponent implements OnInit {
   }
 
   async fetchPosts() {
-    await this.postsService.getPostsByTopicId(this.topicId).then((posts) => {
+    await this.postsService.getPostsByTopicId(this.topicId).then(async (posts) => {
+      for (const post of posts) {
+        post.authorEmail = await this.getEmailByAuthorId(post.author);
+      }
       this.posts = posts;
     });
   }
@@ -70,13 +73,13 @@ export class TopicPostsComponent implements OnInit {
     return userid;
   }
 
-  getCurrentUsername() {
-    let username = '';
+  getCurrentEmail() {
+    let email = '';
     const  user = this.authService.getCurrentUser();
     if (user) {
-      username = user['email'];
+      email = user['email'];
     }
-    return username;
+    return email;
   }
 
   getSizePage() {
@@ -88,6 +91,10 @@ export class TopicPostsComponent implements OnInit {
   }
 
   async getEmailByAuthorId(authorId: string) {
+    console.log('authorId (component)', authorId);
+    if (!authorId) {
+      return '';
+    }
     const email = await this.postsService.getEmailByAuthorId(authorId);
     return email;
   }

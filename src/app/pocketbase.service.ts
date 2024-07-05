@@ -31,7 +31,8 @@ export class PocketBaseService {
     return await this.pb.collection('users').getOne(userId);
   }
 
-  async getEmailByUserId(userId: string) {
+  async getUserEmailById(userId: string): Promise<string> {
+    console.log('userId', userId);
     const user = await this.pb.collection('users').getOne(userId);
     return user['email'];
   }

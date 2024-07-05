@@ -1,8 +1,8 @@
 <div class="create-topic-container">
   <h2>Create Topic</h2>
   <form (ngSubmit)="createTopic()">
-    <input type="text" [(ngModel)]="title" name="title" placeholder="Topic Title" required />
-    <textarea [(ngModel)]="description" name="description" placeholder="Topic Description" rows="5" required></textarea>
+    <input type="text" [(ngModel)]="topic.title" name="title" placeholder="Topic Title" required />
+    <textarea [(ngModel)]="topic.description" name="description" placeholder="Topic Description" rows="5" required></textarea>
     <button type="submit">Create Topic</button>
   </form>
 </div>
