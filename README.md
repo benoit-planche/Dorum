@@ -14,9 +14,9 @@ To get started with Dorum, follow these steps:
 
 To run Dorum locally, use the following command:
 
-\```bash
+```bash
 ng serve
-\```
+```
 
 Then, open your browser and navigate to `http://localhost:4200` to access the application.
 
